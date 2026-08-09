@@ -1,9 +1,13 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { playChime } from '../audio'
 import { formatClock, sideLabel } from '../format'
 import { useRoutineSession } from '../hooks/useSession'
 import { useWakeLock } from '../hooks/useWakeLock'
+import { supportsWebGL } from '../rig/webgl'
 import type { Routine } from '../types'
+
+// The 3D figure pulls in three.js; load it only once a session actually starts.
+const MoveFigure = lazy(() => import('../rig/MoveFigure'))
 
 const RING_RADIUS = 84
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS
@@ -19,6 +23,8 @@ export function SessionView({ routine, soundEnabled, onExit, onComplete }: Sessi
   const { state, move, remainingTotal, progress, dispatch } = useRoutineSession(routine)
   const previousMoveId = useRef(move.id)
   const completed = useRef(false)
+  // Decided once: WebGL-less environments (and jsdom in tests) simply skip the figure.
+  const [show3D] = useState(supportsWebGL)
 
   useWakeLock(state.status === 'running')
 
@@ -64,6 +70,14 @@ export function SessionView({ routine, soundEnabled, onExit, onComplete }: Sessi
       >
         <div className="progress__bar" style={{ width: `${progress * 100}%` }} />
       </div>
+
+      {show3D && !finished && (
+        <div className="move-figure">
+          <Suspense fallback={<div className="move-figure__placeholder" aria-hidden="true" />}>
+            <MoveFigure moveId={move.id} side={move.side} paused={!running} />
+          </Suspense>
+        </div>
+      )}
 
       <div className="timer">
         <svg className="timer__ring" viewBox="0 0 200 200" aria-hidden="true">

@@ -412,6 +412,37 @@ h2 {
   line-height: 1.55;
 }
 
+.move-figure {
+  align-self: center;
+  width: 100%;
+  height: clamp(150px, 26vh, 220px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 50% 8%, var(--bg-raised) 0%, rgba(11, 16, 32, 0) 72%);
+  touch-action: none;
+}
+
+.move-figure__canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.move-figure__canvas:active {
+  cursor: grabbing;
+}
+
+.move-figure__canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.move-figure__placeholder {
+  width: 100%;
+  height: 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .progress__bar,
   .timer__value {
@@ -427,6 +458,10 @@ h2 {
 
   .timer {
     width: min(11rem, 46vw);
+  }
+
+  .move-figure {
+    height: clamp(120px, 17vh, 160px);
   }
 
   .timer__seconds {
