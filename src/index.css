@@ -418,3 +418,22 @@ h2 {
     transition: none;
   }
 }
+
+/* Keeps the session controls reachable without scrolling on short screens. */
+@media (max-height: 700px) {
+  .view {
+    gap: 0.9rem;
+  }
+
+  .timer {
+    width: min(11rem, 46vw);
+  }
+
+  .timer__seconds {
+    font-size: 2.5rem;
+  }
+
+  .move__name {
+    font-size: 1.3rem;
+  }
+}
