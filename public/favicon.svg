@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sunrise over horizon lines">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b2547" />
+      <stop offset="1" stop-color="#0b1020" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffc47a" />
+      <stop offset="1" stop-color="#ff893a" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#sky)" />
+  <circle cx="32" cy="28" r="12" fill="url(#sun)" />
+  <g fill="none" stroke="#ffba6c" stroke-linecap="round">
+    <line x1="14" y1="45.5" x2="50" y2="45.5" stroke-width="2.4" />
+    <line x1="19" y1="52" x2="45" y2="52" stroke-width="2" opacity="0.8" />
+    <line x1="25" y1="57" x2="39" y2="57" stroke-width="1.7" opacity="0.6" />
+  </g>
+</svg>
